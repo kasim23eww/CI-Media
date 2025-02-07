@@ -19,5 +19,4 @@ class ApiConstants{
   static const String getUserPostsByType = '/api/getUserPostsByType';
   static const String getSingleUser = '/api/getSingleUser';
   static const String updatePushNotificationToken = '/api/updatePushNotificationToken';
-
 }
