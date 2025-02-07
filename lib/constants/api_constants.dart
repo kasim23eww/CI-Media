@@ -1,7 +1,7 @@
 
 class ApiConstants{
   //http://localhost:3000/share-news?id=23
-  static const String basURL = 'http://192.168.5.128:8000';
+   static const String basURL = 'http://192.168.5.128:8000';
 
   static const String login = '/loginUser';
   static const String createUser = '/createUser';
