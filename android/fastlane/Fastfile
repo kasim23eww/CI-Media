@@ -33,8 +33,8 @@ platform :android do
 
       build
     # Read testers and release notes from files
-    testers_list = File.exist?("fastlane/testers.txt") ? File.read("fastlane/testers.txt").split("\n") : []
-    release_notes = File.exist?("fastlane/release_notes.txt") ? File.read("fastlane/release_notes.txt") : "New build uploaded"
+    testers_list = File.exist?("testers.txt") ? File.read("testers.txt").split("\n") : []
+    release_notes = File.exist?("release_notes.txt") ? File.read("release_notes.txt") : "New build uploaded"
       increment_version
 
       release = firebase_app_distribution(
