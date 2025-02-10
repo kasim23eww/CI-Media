@@ -1,4 +1,4 @@
-name: Fastlane Deploy to Firebase
+name: AppDistribution Android
 
 on:
   push:

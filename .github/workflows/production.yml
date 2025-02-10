@@ -1,4 +1,4 @@
-name: Mobile App Deployment
+name: Production(android ->AppDistribution/ios ->TestFlight)
 
 on:
   push:
