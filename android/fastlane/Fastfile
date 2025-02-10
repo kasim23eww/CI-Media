@@ -70,6 +70,7 @@ platform :android do
         end
 
         gradle_file = File.read(build_gradle_path)
+         UI.message("📂 gradle_file: #{gradle_file}''")
 
         # Find and increment versionCode
         match = gradle_file.match(/versionCode\s+(\d+)/)
