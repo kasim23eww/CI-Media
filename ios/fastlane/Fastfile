@@ -108,16 +108,15 @@ platform :ios do
 
       increment_version
 
-      changelog = File.exist?("changelog.txt") ? File.read("changelog.txt") : "Bug fixes & improvements 🚀"
 
       build_app(
         scheme: "Runner"
       )
 
       firebase_app_distribution(
-        app: "1:1025079123340:ios:5efe21b9dee41ee01acaa9",  # Replace with your Firebase App ID
-        testers: "qasimvora5@gmail.com",  # Add testers' emails
-        release_notes: changelog
+        app: "1:1025079123340:ios:5efe21b9dee41ee01acaa9",
+       testers_file: "./testers.txt",
+       release_notes_file: "./release_notes.txt",
       )
     end
 

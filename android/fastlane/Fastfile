@@ -37,12 +37,12 @@ platform :android do
 
       release = firebase_app_distribution(
         app: "1:1025079123340:android:4f0a4e23c3139c4a1acaa9",
-        testers: "qasimvora5@gmail.com",
+       testers_file: "./testers.txt",
+       release_notes_file: "./release_notes.txt",
         firebase_cli_token: ENV["FIREBASE_TOKEN"],
         firebase_cli_path: "/usr/local/bin/firebase",
         android_artifact_type: "APK",
         apk_path: "../build/app/outputs/flutter-apk/app-release.apk",
-        release_notes: "Automatic build and upload with Fastlane and Firebase App Distribution",
         verbose: true
       )
     end
