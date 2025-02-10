@@ -112,11 +112,15 @@ platform :ios do
       build_app(
         scheme: "Runner"
       )
+    # Read testers and release notes from files
+    testers_list = File.exist?("fastlane/testers.txt") ? File.read("fastlane/testers.txt").split("\n") : []
+    release_notes = File.exist?("fastlane/release_notes.txt") ? File.read("fastlane/release_notes.txt") : "New build uploaded"
+
 
       firebase_app_distribution(
         app: "1:1025079123340:ios:5efe21b9dee41ee01acaa9",
-       testers_file: "./testers.txt",
-       release_notes_file: "./release_notes.txt",
+        testers: testers_list.join(","),
+        release_notes: release_notes,
       )
     end
 

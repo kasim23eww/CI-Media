@@ -1,1 +1,3 @@
-qasimvora5@gmail.com,kasimvora23@gmail.com
+- Fixed major UI bugs
+- Improved app performance
+- Added new onboarding screens Android

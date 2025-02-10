@@ -32,13 +32,15 @@ platform :android do
     lane :deploy do
 
       build
-
+    # Read testers and release notes from files
+    testers_list = File.exist?("fastlane/testers.txt") ? File.read("fastlane/testers.txt").split("\n") : []
+    release_notes = File.exist?("fastlane/release_notes.txt") ? File.read("fastlane/release_notes.txt") : "New build uploaded"
       increment_version
 
       release = firebase_app_distribution(
         app: "1:1025079123340:android:4f0a4e23c3139c4a1acaa9",
-       testers_file: "./testers.txt",
-       release_notes_file: "./release_notes.txt",
+        testers: testers_list.join(","),
+        release_notes: release_notes,
         firebase_cli_token: ENV["FIREBASE_TOKEN"],
         firebase_cli_path: "/usr/local/bin/firebase",
         android_artifact_type: "APK",
