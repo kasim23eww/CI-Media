@@ -27,7 +27,7 @@ platform :android do
       sh "java -version" # Print the Java version
 
 
-#        increment_build_number
+       increment_build_number
 
       gradle(task: "assembleRelease", print_command: true, verbose: true)
     end
@@ -74,6 +74,7 @@ platform :android do
 
         # Find and increment versionCode
         match = gradle_file.match(/versionCode\s+(\d+)/)
+          UI.message("📂 match: #{match}''")
         if match
           new_version_code = match[1].to_i + 1
           updated_gradle = gradle_file.gsub(/versionCode\s+\d+/, "versionCode #{new_version_code}")
