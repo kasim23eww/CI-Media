@@ -3,7 +3,7 @@ name: Development(android/ios) AppDistribution
 on:
   push:
     branches:
-      - production_  # Change this to your deployment branch
+      - production  # Change this to your deployment branch
   workflow_dispatch:
 
 jobs:
