@@ -28,7 +28,7 @@ platform :android do
 
 
        increment_build_number
-              
+
       gradle(task: "assembleRelease", print_command: true, verbose: true)
     end
 
@@ -56,20 +56,30 @@ platform :android do
     end
 
 
+
       desc "Increment Build Number"
       lane :increment_build_number do
-        build_gradle_path = "android/app/build.gradle"
+        build_gradle_path = "./android/app/build.gradle"
 
-        # Read the current versionCode from build.gradle
+        # Ensure file exists before reading
+        unless File.exist?(build_gradle_path)
+          UI.user_error!("❌ build.gradle file not found at #{build_gradle_path}")
+        end
+
         gradle_file = File.read(build_gradle_path)
-        new_version_code = gradle_file.match(/versionCode (\d+)/)[1].to_i + 1
 
-        # Replace the old versionCode with the new one
-        updated_gradle = gradle_file.gsub(/versionCode \d+/, "versionCode #{new_version_code}")
-        File.write(build_gradle_path, updated_gradle)
-
-        UI.message("✅ Updated versionCode to #{new_version_code}")
+        # Find and increment versionCode
+        match = gradle_file.match(/versionCode\s+(\d+)/)
+        if match
+          new_version_code = match[1].to_i + 1
+          updated_gradle = gradle_file.gsub(/versionCode\s+\d+/, "versionCode #{new_version_code}")
+          File.write(build_gradle_path, updated_gradle)
+          UI.message("✅ Updated versionCode to #{new_version_code}")
+        else
+          UI.user_error!("❌ Couldn't find versionCode in #{build_gradle_path}")
+        end
       end
+
 
 
 end
