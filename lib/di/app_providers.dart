@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -68,7 +69,7 @@ ApiServices apiServices(ApiServicesRef ref){
 }
 
 @riverpod
-RemoteRepository remoteRepository(RemoteRepositoryRef ref){
+RemoteRepository remoteRepository(Ref ref){
   final apiServices = ref.read(apiServicesProvider);
   return RemoteRepositoryImpl(apiServices: apiServices);
 }

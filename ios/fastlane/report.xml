@@ -5,22 +5,62 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: app_store_connect_api_key" time="0.006569">
+      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.000364">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: match" time="3.082823">
+      <testcase classname="fastlane.lanes" name="01: delete_keychain" time="0.021973">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: build_app" time="267.181634">
+      <testcase classname="fastlane.lanes" name="02: create_keychain" time="0.254943">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: pilot" time="171.328017">
+      <testcase classname="fastlane.lanes" name="03: app_store_connect_api_key" time="0.004518">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="04: match" time="105.033361">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="05: sync_code_signing" time="42.139177">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: update_code_signing_settings" time="0.115672">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: Switch to ios increment_version lane" time="0.000309">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: firebase_app_distribution_get_latest_release" time="1.187895">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: increment_build_number" time="2.707519">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: build_app" time="100.80874">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: firebase_app_distribution" time="29.191171">
         
       </testcase>
     

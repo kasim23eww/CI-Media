@@ -13,10 +13,28 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
-### beta
+## iOS
+
+### ios beta
 
 ```sh
-[bundle exec] fastlane beta
+[bundle exec] fastlane ios beta
+```
+
+Push a new beta build to TestFlight
+
+### ios firebase_beta
+
+```sh
+[bundle exec] fastlane ios firebase_beta
+```
+
+
+
+### ios increment_version
+
+```sh
+[bundle exec] fastlane ios increment_version
 ```
 
 
