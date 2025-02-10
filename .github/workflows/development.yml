@@ -79,7 +79,7 @@ jobs:
         run: |
           cd ios
           fastlane match adhoc --readonly
-          fastlane ios firebase_app_distribution --verbose
+          fastlane ios firebase_beta --verbose
 
   deploy_android:
     name: Build & Upload Android to Firebase
