@@ -59,7 +59,7 @@ platform :android do
 
       desc "Increment Build Number"
       lane :increment_build_number do
-        build_gradle_path = "../android/app/build.gradle"
+        build_gradle_path = "../app/build.gradle"
 
         # Ensure file exists before reading
         unless File.exist?(build_gradle_path)
