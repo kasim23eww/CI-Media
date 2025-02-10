@@ -3,7 +3,7 @@ name: Mobile App Deployment
 on:
   push:
     branches:
-      - production  # Change this to your deployment branch
+      - production_  # Change this to your deployment branch
   workflow_dispatch:
 
 jobs:
