@@ -21,36 +21,29 @@ platform :android do
   end
 
 
-  desc "Increment Build Number"
-   lane :increment_build_number do
-     build_gradle_path = "android/app/build.gradle"
+  desc "Build the APK"
+    lane :build do
+      sh "gradle -v" # Print the Gradle version
+      sh "java -version" # Print the Java version
 
-     # Read the current versionCode from build.gradle
-     gradle_file = File.read(build_gradle_path)
-     new_version_code = gradle_file.match(/versionCode (\d+)/)[1].to_i + 1
 
-     # Replace the old versionCode with the new one
-     updated_gradle = gradle_file.gsub(/versionCode \d+/, "versionCode #{new_version_code}")
-     File.write(build_gradle_path, updated_gradle)
-
-     UI.message("✅ Updated versionCode to #{new_version_code}")
-   end
-
-   desc "Build the APK"
-   lane :build do
-     increment_build_number # Call the increment_build_number lane
-     sh "gradle -v" # Print the Gradle version
-     sh "java -version" # Print the Java version
-     gradle(task: "assembleRelease", print_command: true, verbose: true)
-   end
+       increment_version_code(
+                gradle_file_path: "./app/build.gradle"
+              )
+              
+      gradle(task: "assembleRelease", print_command: true, verbose: true)
+    end
 
     desc "Deploy to Firebase App Distribution"
     lane :deploy do
+
+
 
       build
     # Read testers and release notes from files
     testers_list = File.exist?("testers.txt") ? File.read("testers.txt").split("\n") : []
     release_notes = File.exist?("release_notes.txt") ? File.read("release_notes.txt") : "New build uploaded"
+
 
       release = firebase_app_distribution(
         app: "1:1025079123340:android:4f0a4e23c3139c4a1acaa9",
@@ -63,9 +56,6 @@ platform :android do
         verbose: true
       )
     end
-
-
-
 
 
 end
