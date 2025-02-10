@@ -26,9 +26,6 @@ platform :android do
       sh "gradle -v" # Print the Gradle version
       sh "java -version" # Print the Java version
 
-
-       increment_build_number
-
       gradle(task: "assembleRelease", print_command: true, verbose: true)
     end
 
