@@ -3,12 +3,12 @@ name: Development(android/ios) AppDistribution
 on:
   push:
     branches:
-      - production  # Change this to your deployment branch
+      - production_  # Change this to your deployment branch
   workflow_dispatch:
 
 jobs:
   deploy_ios:
-    name: Build & Upload iOS to TestFlight
+    name: Build & Upload iOS to AppDistribution
     runs-on: macos-latest  # Required for iOS builds
 
     steps:
@@ -36,7 +36,7 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Get Packages
+      - name: Get Flutter Packages
         run: |
           flutter clean
           flutter pub get
@@ -82,7 +82,7 @@ jobs:
           fastlane ios firebase_beta --verbose
 
   deploy_android:
-    name: Build & Upload Android to Firebase
+    name: Build & Upload Android to AppDistribution
     runs-on: ubuntu-latest
 
     steps:
@@ -104,7 +104,7 @@ jobs:
           echo "flutter.versionName=1.0.0" >> android/local.properties
           echo "flutter.versionCode=2" >> android/local.properties
 
-      - name: Install Dependencies
+      - name: Update Flutter Dependencies
         run: |
           flutter clean   
           flutter pub upgrade  
@@ -115,7 +115,7 @@ jobs:
         with:
           java-version: '17'
 
-      - name: Install Dependencies
+      - name: Setup Fastlane
         run: |
           sudo apt-get update
           sudo apt-get install -y ruby-full

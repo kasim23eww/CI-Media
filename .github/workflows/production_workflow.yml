@@ -3,7 +3,7 @@ name: Production(android ->AppDistribution/ios ->TestFlight)
 on:
   push:
     branches:
-      - production1  # Change this to your deployment branch
+      - production_  # Change this to your deployment branch
   workflow_dispatch:
 
 jobs:
@@ -103,7 +103,7 @@ jobs:
           echo "flutter.versionName=1.0.0" >> android/local.properties
           echo "flutter.versionCode=1" >> android/local.properties
 
-      - name: Install Dependencies
+      - name: Upgrade Flutter Dependencies
         run: |
           flutter clean   
           flutter pub upgrade  
@@ -114,7 +114,7 @@ jobs:
         with:
           java-version: '17'
 
-      - name: Install Dependencies
+      - name: Setup Fastlane
         run: |
           sudo apt-get update
           sudo apt-get install -y ruby-full

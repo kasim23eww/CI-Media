@@ -55,34 +55,34 @@ platform :android do
     end
 
 
-
-      desc "Increment Build Number"
-      lane :increment_build_number do
-
-        print_current_directory
-        build_gradle_path = "/home/runner/work/CI-Media/CI-Media/android/app/build.gradle"
-
-
-        # Ensure file exists before reading
-        unless File.exist?(build_gradle_path)
-          UI.user_error!("❌ build.gradle file not found at #{build_gradle_path}")
-        end
-
-        gradle_file = File.read(build_gradle_path)
-         UI.message("📂 gradle_file: #{gradle_file}''")
-
-        # Find and increment versionCode
-        match = gradle_file.match(/versionCode\s+(\d+)/)
-          UI.message("📂 match: #{match}''")
-        if match
-          new_version_code = match[1].to_i + 1
-          updated_gradle = gradle_file.gsub(/versionCode\s+\d+/, "versionCode #{new_version_code}")
-          File.write(build_gradle_path, updated_gradle)
-          UI.message("✅ Updated versionCode to #{new_version_code}")
-        else
-          UI.user_error!("❌ Couldn't find versionCode in #{build_gradle_path}")
-        end
-      end
+#
+#       desc "Increment Build Number"
+#       lane :increment_build_number do
+#
+#         print_current_directory
+#         build_gradle_path = "/home/runner/work/CI-Media/CI-Media/android/app/build.gradle"
+#
+#
+#         # Ensure file exists before reading
+#         unless File.exist?(build_gradle_path)
+#           UI.user_error!("❌ build.gradle file not found at #{build_gradle_path}")
+#         end
+#
+#         gradle_file = File.read(build_gradle_path)
+#          UI.message("📂 gradle_file: #{gradle_file}''")
+#
+#         # Find and increment versionCode
+#         match = gradle_file.match(/versionCode\s+(\d+)/)
+#           UI.message("📂 match: #{match}''")
+#         if match
+#           new_version_code = match[1].to_i + 1
+#           updated_gradle = gradle_file.gsub(/versionCode\s+\d+/, "versionCode #{new_version_code}")
+#           File.write(build_gradle_path, updated_gradle)
+#           UI.message("✅ Updated versionCode to #{new_version_code}")
+#         else
+#           UI.user_error!("❌ Couldn't find versionCode in #{build_gradle_path}")
+#         end
+#       end
 
 
 lane :print_current_directory do

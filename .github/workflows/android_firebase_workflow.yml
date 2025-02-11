@@ -2,7 +2,7 @@ name: AppDistribution Android
 
 on:
   push:
-    branches: [ production1 ]
+    branches: [ production_ ]
   workflow_dispatch:
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
           echo "flutter.versionName=1.0.0" >> android/local.properties
           echo "flutter.versionCode=1" >> android/local.properties
 
-      - name: Install Dependencies
+      - name: Update Flutter Dependencies
         run: |
           flutter/bin/flutter clean   
           flutter/bin/flutter pub upgrade  
@@ -39,7 +39,7 @@ jobs:
         with:
           java-version: '17'
 
-      - name: Install dependencies
+      - name: Setup Fastlane
         run: |
           sudo apt-get update
           sudo apt-get install -y ruby-full
