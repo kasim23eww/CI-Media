@@ -102,7 +102,7 @@ jobs:
           echo "flutter.sdk=${GITHUB_WORKSPACE}/flutter" >> android/local.properties
           echo "flutter.buildMode=debug" >> android/local.properties
           echo "flutter.versionName=1.0.0" >> android/local.properties
-          echo "flutter.versionCode=1" >> android/local.properties
+          echo "flutter.versionCode=2" >> android/local.properties
 
       - name: Install Dependencies
         run: |
