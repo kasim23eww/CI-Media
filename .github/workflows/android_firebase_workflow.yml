@@ -2,7 +2,7 @@ name: AppDistribution Android
 
 on:
   push:
-    branches: [ production]
+    branches: [ production ]
   workflow_dispatch:
 
 jobs:
@@ -41,6 +41,7 @@ jobs:
 
       - name: Set up Keystore from base64
         run: |
+          mkdir -p ~/.android
           echo "$KEYSTORE_FILE" | base64 --decode > ~/.android/your-keystore-name.jks
         env:
           KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
