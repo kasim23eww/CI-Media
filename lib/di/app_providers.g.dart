@@ -71,7 +71,7 @@ final apiServicesProvider = AutoDisposeProvider<ApiServices>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ApiServicesRef = AutoDisposeProviderRef<ApiServices>;
-String _$remoteRepositoryHash() => r'9c923e1cb4246dceeb58552f286925a05e873499';
+String _$remoteRepositoryHash() => r'0a934e653b6d2a9c836f76413281149bf50cf469';
 
 /// See also [remoteRepository].
 @ProviderFor(remoteRepository)

@@ -104,6 +104,13 @@ abstract class ApiServices {
   Future<ApiResponse> updatePushNotificationToken({
     @Query("token") String? token,
   });
+
+  @GET(ApiConstants.getStreamingToken)
+  Future<ApiResponse> getStreamingToken({
+    @Query("channel")  String? channel
+  });
+
+
   //
   // @POST(ApiConstant.sendEmailVerification)
   // Future<ApiResponse> sendEmailVerification({

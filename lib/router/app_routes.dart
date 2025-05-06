@@ -11,6 +11,7 @@ abstract class Routes {
   static const String cameraScreen = _Paths.cameraScreen;
   static const String mediaScreen = _Paths.mediaScreen;
   static const String postScreen = _Paths.postScreen;
+  static const String liveStream = _Paths.liveStream;
 
 }
 
@@ -25,7 +26,7 @@ abstract class _Paths {
   static const String cameraScreen = '/cameraScreen';
   static const String mediaScreen = '/mediaScreen';
   static const String postScreen = '/postScreen';
-  static const String setting = '/setting';
+  static const String liveStream = '/liveStream';
   static const String faq = '/faq';
   static const String about = '/about';
   static const String privacyPolicy = '/privacy_policy';

@@ -44,6 +44,8 @@ abstract class RemoteRepository{
 
   Future<ApiResponse> updatePushNotificationToken({required String token});
 
+  Future<ApiResponse> generateToken({required String channel});
+
 
 
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:social_app/src/presentation/screen/bottom_nav/bottom_nav.dart';
 import 'package:social_app/src/presentation/screen/camera/camera_screen.dart';
 import 'package:social_app/src/presentation/screen/home/home_screen.dart';
+import 'package:social_app/src/presentation/screen/live_stream/live_stream_screen.dart';
 import 'package:social_app/src/presentation/screen/login/login_screen.dart';
 import 'package:social_app/src/presentation/screen/media/media_screen.dart';
 import 'package:social_app/src/presentation/screen/post/post_screen.dart';
@@ -18,7 +19,7 @@ part 'app_routes.dart';
 
 class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
-    late Map<String, dynamic> arguments;
+     Map<String, dynamic>? arguments;
 
     if (settings.arguments != null) {
       arguments = settings.arguments as Map<String, dynamic>;
@@ -111,6 +112,15 @@ class AppRouter {
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
           const PostScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return slideTransition(animation, child);
+          },
+        );
+
+      case Routes.liveStream:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+          LiveStreamScreen(chanel: arguments != null ? arguments['chanel_id'] : "",),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return slideTransition(animation, child);
           },

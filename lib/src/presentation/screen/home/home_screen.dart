@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:social_app/gen/assets.gen.dart';
+import 'package:social_app/router/navigation_methods.dart';
 import 'package:social_app/src/presentation/notifier/home/home_notifier.dart';
 import 'package:social_app/theme/app_color.dart';
 import 'package:social_app/widget/network_image.dart';
@@ -17,13 +19,42 @@ class HomeScreen extends ConsumerWidget {
     final state = ref.watch(homeNotifierProvider);
     return SafeArea(
       top: false,
+      minimum: const EdgeInsets.all(10),
       bottom: true,
       child: Container(
         clipBehavior: Clip.hardEdge,
 
         decoration: const BoxDecoration(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+             Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                const NetworkImageWidget(
+                  url: "",
+                  height: 60,
+                  borderRadius: 30,
+                  width: 60,
+                  fit: BoxFit.fill,
+                ),
+                InkWell(
+                  onTap: ()async{
+                    await [Permission.microphone, Permission.camera].request().whenComplete((){
+                      context.pushNamed(Routes.liveStream,);
+                    });
+                     },
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 10,
+                    child: Icon(Icons.add,size: 16,),
+                  ),
+                )
+              ],
+            ),
+
           state.lists.isNotEmpty ?  Expanded(
                 child: ListView.separated(
                   padding: const EdgeInsets.only(top: 25,left: 10,right: 10,bottom: 15),

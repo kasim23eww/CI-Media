@@ -1,6 +1,8 @@
 /.gradle
 /captures/
+.cxx/
 
+android/fastlane/*.json
 
 GeneratedPluginRegistrant.java
 

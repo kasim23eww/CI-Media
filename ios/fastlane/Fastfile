@@ -10,16 +10,17 @@ APPLE_KEY_ID = ENV["APPLE_KEY_ID"]
 APPLE_ISSUER_ID = ENV["APPLE_ISSUER_ID"]
 FIREBASE_TOKEN = ENV["FIREBASE_TOKEN"]
 # FIREBASE_TOKEN = "1//0gfDQ0drF1qYKCgYIARAAGBASNwF-L9IrxJfOPto0UgVAbqrW-CoxfLT0UzheXbcvOgC4IbYGba7LS5rS9PeGHNh6redDfO3itSk"
-APPLE_KEY_CONTENT = <<~EOS
-  -----BEGIN PRIVATE KEY-----
-  MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQg1jlqyHk6uBHN0lbu
-  d02FsNzDFHCvzpR+Zxn1E5XDj22gCgYIKoZIzj0DAQehRANCAAT290K44xwxN4US
-  hthqL8jnKCLWRaBAPoMB4A9ARYq0MJu3oDJDrZxDDiLMXS4/G7Kq6tcDdVCfMrc8
-  /8iklnd/
-  -----END PRIVATE KEY-----
-EOS
+# APPLE_KEY_CONTENT = <<~EOS
+#   -----BEGIN PRIVATE KEY-----
+#   MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQg1jlqyHk6uBHN0lbu
+#   d02FsNzDFHCvzpR+Zxn1E5XDj22gCgYIKoZIzj0DAQehRANCAAT290K44xwxN4US
+#   hthqL8jnKCLWRaBAPoMB4A9ARYq0MJu3oDJDrZxDDiLMXS4/G7Kq6tcDdVCfMrc8
+#   /8iklnd/
+#   -----END PRIVATE KEY-----
+# EOS
 # APP_IDENTIFIER = "com.example.social.app"
 APP_IDENTIFIER = ENV["APP_IDENTIFIER"]
+APPLE_KEY_CONTENT = ENV["APPLE_KEY_CONTENT"]
 
 def delete_temp_keychain(name)
   delete_keychain(
@@ -69,7 +70,7 @@ platform :ios do
     current_build_number = app_store_build_number(live: false)
     increment_build_number(xcodeproj: "Runner.xcodeproj", build_number: current_build_number + 1)
 
-  # Upload to TestFlight with a proper changelog
+  # Upload to TestFlight with a proper changelogx
   changelog = File.exist?("changelog.txt") ? File.read("changelog.txt") : "Bug fixes & improvements 🚀"
   build_app
   upload_to_testflight(

@@ -104,4 +104,10 @@ class RemoteRepositoryImpl extends RemoteRepository{
   }
 
 
+  @override
+  Future<ApiResponse> generateToken({required String channel})  async{
+    return await apiServices.getStreamingToken(channel: channel);
+  }
+
+
 }

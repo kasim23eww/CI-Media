@@ -2,7 +2,7 @@ name: iOS TestFlight Deployment
 
 on:
   push:
-    branches: [ production_ ]
+    branches: [ production ]
 jobs:
   deploy:
     name: Build & Upload to TestFlight

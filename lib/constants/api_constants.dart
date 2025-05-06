@@ -1,7 +1,8 @@
 
 class ApiConstants{
   //http://localhost:3000/share-news?id=23
-  static const String basURL = 'http://192.168.5.128:8000';
+  static const String basURL = 'http://192.168.5.180:8000';
+  static const String appId = 'd8053b39af7e4b719d0c95bd1e7cc7d4';
 
   static const String login = '/loginUser';
   static const String createUser = '/createUser';
@@ -19,4 +20,5 @@ class ApiConstants{
   static const String getUserPostsByType = '/api/getUserPostsByType';
   static const String getSingleUser = '/api/getSingleUser';
   static const String updatePushNotificationToken = '/api/updatePushNotificationToken';
+  static const String getStreamingToken = '/api/getStreamingToken';
 }
