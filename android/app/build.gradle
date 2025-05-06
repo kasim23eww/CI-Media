@@ -37,10 +37,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("your-keystore-name.jks")  // Replace with your keystore file name
-            storePassword "Kasim@1234"    // Replace with your keystore password
-            keyAlias "your-key-alias"                 // Replace with your key alias
-            keyPassword "Kasim@1234"
+            storeFile file(System.getenv("HOME") + "/.android/your-keystore-name.jks")
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
         }
     }
 
