@@ -1,87 +1,12 @@
-name: Production(android ->AppDistribution/ios ->TestFlight)
+name: AppDistribution Android
 
 on:
   push:
-    branches:
-      - production_  # Change this to your deployment branch
+    branches: [ production]
   workflow_dispatch:
 
 jobs:
-  deploy_ios:
-    name: Build & Upload iOS to TestFlight
-    runs-on: macos-latest  # Required for iOS builds
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Set up Ruby & Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0
-          bundler-cache: true
-
-      - name: Install Bundler
-        run: |
-          gem install bundler
-
-      - name: Install Dependencies via Bundler
-        run: |
-          cd ios
-          bundle install
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.27.4"
-          channel: 'stable'
-          cache: true
-
-      - name: Get Packages
-        run: |
-          flutter clean
-          flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
-
-      - name: Install CocoaPods
-        run: |
-          sudo gem install cocoapods
-          cd ios
-          rm Podfile.lock
-          pod install 
-
-      - name: Print environment variables
-        run: |
-          echo "APPLE_KEY_CONTENT=${{ secrets.APPLE_KEY_CONTENT }}"
-          echo "APPLE_KEY_ID=${{ secrets.APPLE_KEY_ID }}"
-          echo "TEMP_KEYCHAIN_PASSWORD=${{ secrets.TEMP_KEYCHAIN_PASSWORD }}"
-          echo "APPLE_ISSUER_ID=${{ secrets.APPLE_ISSUER_ID }}"
-          echo "APP_IDENTIFIER=${{ secrets.APP_IDENTIFIER }}"
-          echo "TEMP_KEYCHAIN_USER=${{ secrets.TEMP_KEYCHAIN_USER }}"
-          echo "FASTLANE_USER=${{ secrets.FASTLANE_APPLE_ID }}"
-          echo "MATCH_PASSWORD=${{ secrets.MATCH_PASSWORD }}"
-          echo "FASTLANE_VERBOSE=${{ secrets.FASTLANE_VERBOSE }}"
-
-
-      - name: Build & Upload to TestFlight
-        env:
-          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
-          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
-          TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
-          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
-          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
-          TEMP_KEYCHAIN_USER: ${{ secrets.TEMP_KEYCHAIN_USER }}
-          FASTLANE_USER: ${{ secrets.FASTLANE_APPLE_ID }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          FASTLANE_VERBOSE: true
-
-
-        run: |
-          cd ios
-          fastlane match appstore --readonly
-          fastlane ios beta --verbose
-
-  deploy_android:
-    name: Build & Upload Android to Firebase
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -91,7 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.27.4"
+          flutter-version: "3.29.2"
           channel: 'stable'
           cache: true
 
@@ -101,9 +26,9 @@ jobs:
           echo "flutter.sdk=${GITHUB_WORKSPACE}/flutter" >> android/local.properties
           echo "flutter.buildMode=debug" >> android/local.properties
           echo "flutter.versionName=1.0.0" >> android/local.properties
-          echo "flutter.versionCode=1" >> android/local.properties
+          echo "flutter.versionCode=2" >> android/local.properties
 
-      - name: Upgrade Flutter Dependencies
+      - name: Update Flutter Dependencies
         run: |
           flutter clean   
           flutter pub upgrade  
@@ -113,6 +38,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
+
+      - name: Set up Keystore from base64
+        run: |
+          mkdir -p ~/.android
+          echo "$KEYSTORE_FILE" | base64 --decode > ~/.android/your-keystore-name.jks
+        env:
+          KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
 
       - name: Setup Fastlane
         run: |
@@ -126,6 +58,9 @@ jobs:
       - name: Run Fastlane Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
           cd android
           fastlane android deploy
